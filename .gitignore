@@ -26,6 +26,12 @@ artifacts/
 .cache/
 models/
 
+
+# allow runtime artifacts for CI/Render 
+!artifacts/ticket_classifier_pipeline.joblib
+!artifacts/label_encoder.joblib
+!artifacts/training_meta.json
+
 # --- Datasets (keep only small sample data) ---
 data/
 !data/sample*.csv
@@ -76,3 +82,6 @@ coverage.xml
 # --- OS Generated Files ---
 .DS_Store
 Thumbs.db
+
+
+

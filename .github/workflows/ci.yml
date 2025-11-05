@@ -2,27 +2,34 @@ name: CI
 
 on:
   push:
-    branches: ["main"]
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
+    branches: [ "main" ]
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
           python-version: "3.11"
 
       - name: Install dependencies
         run: |
-          python3 -m pip install --upgrade pip
+          python -m pip install --upgrade pip
           pip install -r requirements.txt
+          pip install pytest
+
+      - name: Verify artifacts exist
+        run: |
+          ls -R artifacts
+          if [ ! -f artifacts/ticket_classifier_pipeline.joblib ]; then echo "Missing model file!"; exit 1; fi
 
       - name: Run tests
-        run: pytest -q
+        run: |
+          pytest -q
