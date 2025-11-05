@@ -1,0 +1,78 @@
+# --- Python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.pdb
+*.egg-info/
+*.log
+
+# --- Virtual Environments ---
+venv/
+.venv/
+ENV/
+env/
+.conda/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+*.ipynb_checkpoints
+
+# --- Artifacts & Models ---
+artifacts/
+**/artifacts/
+*.joblib
+*.pkl
+.cache/
+models/
+
+# --- Datasets (keep only small sample data) ---
+data/
+!data/sample*.csv
+
+# --- Terraform ---
+.terraform/
+*.tfstate
+*.tfstate.*
+terraform.tfvars
+crash.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# --- Docker ---
+*.bak
+*.tar
+.dockerignore
+docker-compose.yml.override
+.build/
+.render/
+
+# --- Tools & IDEs ---
+.vscode/
+.idea/
+*.swp
+
+# --- Logs & Outputs ---
+*.out
+*.err
+logs/
+*.csv~
+*.tmp
+
+# --- Secrets ---
+*.env
+.env.*
+secrets.txt
+aws_credentials
+credentials.json
+
+# --- Coverage & Reports ---
+htmlcov/
+*.coverage
+coverage.xml
+
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
