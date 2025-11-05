@@ -34,15 +34,6 @@ This project demonstrates a complete MLOps lifecycle including data preprocessin
 
 ---
 
-## Live Demo
-* Application: https://smartticketai-mlops.onrender.com  
-* Swagger API Docs: https://smartticketai-mlops.onrender.com/docs
-
-Example UI output:
-
-![Live Demo](LIVE_DEMO.PNG)
-
----
 
 ## Technical Components
 
@@ -102,6 +93,7 @@ Instead, SmartTicketAI would be automatically connected to:
 - Ticketing tools (Jira Service Desk, ServiceNow)
 
 In those cases, whenever a new ticket or email arrives, the system sends the message text directly to the SmartTicketAI API for classification and automated response generation, without any manual input from the user.
+
 
 
 
