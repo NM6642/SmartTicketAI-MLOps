@@ -1,0 +1,10 @@
+{
+  "accuracy": 0.5,
+  "labels": [
+    "Accounting",
+    "Hardware",
+    "Software"
+  ],
+  "text_col": "text",
+  "label_col": "queue"
+}
