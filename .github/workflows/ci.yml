@@ -10,7 +10,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     env:
-      PYTHONPATH: .   # make repo root importable (so `import app` works)
+      PYTHONPATH: .   
 
     steps:
       - name: Checkout code
