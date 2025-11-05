@@ -1,5 +1,8 @@
 from fastapi import FastAPI, HTTPException
+from fastapi.staticfiles import StaticFiles
+from fastapi.responses import FileResponse
 from pydantic import BaseModel
+from pathlib import Path
 import joblib
 
 MODEL_PATH = "artifacts/ticket_classifier_pipeline.joblib"
@@ -13,10 +16,17 @@ AUTO_RESPONSES = {
     "Technical Issue": "Please share error message and device details.",
     "Feature Request": "Thanks! We will share this with product team.",
 }
-
 DEFAULT_RESPONSE = "Thanks, we will review your request."
 
 app = FastAPI(title="SmartTicketAI")
+
+# ✅ Serve static UI files
+app.mount("/static", StaticFiles(directory="src/static"), name="static")
+
+# ✅ Homepage route
+@app.get("/")
+def home():
+    return FileResponse(Path("src/static/index.html"))
 
 class Ticket(BaseModel):
     text: str

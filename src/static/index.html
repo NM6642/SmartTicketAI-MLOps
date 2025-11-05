@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>SmartTicketAI</title>
+  <style>
+    :root { --bg:#0f1115; --panel:#151823; --text:#e8eef9; --accent:#00e1ff; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; font-family: ui-sans-serif,system-ui,Segoe UI,Roboto;
+      background: var(--bg); color: var(--text); display: flex; min-height: 100vh;
+      align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      width: 100%; max-width: 780px; background: var(--panel);
+      border-radius: 16px; padding: 28px; box-shadow: 0 10px 30px rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+    h1 { margin: 0 0 6px; font-size: 28px; letter-spacing: .2px; }
+    p  { margin: 0 0 16px; opacity: .85; }
+    .row { display: grid; grid-template-columns: 1fr; gap: 14px; margin-top: 14px; }
+    textarea {
+      width: 100%; min-height: 120px; resize: vertical;
+      background: #0b0d12; color: var(--text); border: 1px solid #262b3a;
+      border-radius: 10px; padding: 12px;
+    }
+    button, .btn {
+      display: inline-block; text-align: center; padding: 12px 14px; border-radius: 10px;
+      border: 0; cursor: pointer; background: var(--accent); color: #071317; font-weight: 600;
+    }
+    .ghost { background: transparent; color: var(--text); border: 1px solid #2b3144; }
+    .result {
+      margin-top: 10px; background:#0b0d12; border:1px solid #263049;
+      border-radius: 10px; padding: 12px; white-space: pre-wrap; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .footer { margin-top: 10px; font-size: 12px; opacity: .65; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>SmartTicketAI</h1>
+    <p>AI-powered ticket classification & suggested replies. Try it below or open the API docs.</p>
+
+    <div class="row">
+      <button class="btn" onclick="location.href='/docs'">📘 Open API Docs</button>
+      <button class="btn ghost" onclick="location.href='/health'">🩺 Health</button>
+    </div>
+
+    <div class="row">
+      <label for="txt">🔍 Try a prediction:</label>
+      <textarea id="txt" placeholder="e.g. My invoice shows the wrong amount"></textarea>
+      <button class="btn" onclick="predict()">Predict</button>
+      <div id="out" class="result" style="display:none;"></div>
+    </div>
+
+    <div class="footer">Deployed on Render • Swagger available at <code>/docs</code></div>
+  </div>
+
+  <script>
+    async function predict() {
+      const text = document.getElementById('txt').value.trim();
+      if (!text) { alert('Please enter some text'); return; }
+      const res = await fetch('/predict', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text })
+      });
+      const data = await res.json();
+      const el = document.getElementById('out');
+      el.style.display = 'block';
+      el.textContent =
+        `label: ${data.label}\nconfidence: ${(data.confidence*100).toFixed(2)}%\n\nsuggested_response:\n${data.suggested_response}`;
+    }
+  </script>
+</body>
+</html>
