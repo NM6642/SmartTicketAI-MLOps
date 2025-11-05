@@ -78,7 +78,7 @@ This project demonstrates a complete MLOps lifecycle including data preprocessin
 
 Example UI output:
 
-![Live Demo](demo.PNG)
+![Live Demo](demo.png)
 
 ---
 ### Real-World Usage
@@ -93,6 +93,7 @@ Instead, SmartTicketAI would be automatically connected to:
 - Ticketing tools (Jira Service Desk, ServiceNow)
 
 In those cases, whenever a new ticket or email arrives, the system sends the message text directly to the SmartTicketAI API for classification and automated response generation, without any manual input from the user.
+
 
 
 
