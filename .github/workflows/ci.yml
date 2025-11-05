@@ -9,6 +9,8 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    env:
+      PYTHONPATH: .   # make repo root importable (so `import app` works)
 
     steps:
       - name: Checkout code
@@ -28,7 +30,9 @@ jobs:
       - name: Verify artifacts exist
         run: |
           ls -R artifacts
-          if [ ! -f artifacts/ticket_classifier_pipeline.joblib ]; then echo "Missing model file!"; exit 1; fi
+          test -f artifacts/ticket_classifier_pipeline.joblib
+          test -f artifacts/label_encoder.joblib
+          test -f artifacts/training_meta.json
 
       - name: Run tests
         run: |
